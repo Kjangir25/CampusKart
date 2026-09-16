@@ -1,0 +1,264 @@
+.topbar {
+    position: fixed;
+    z-index: 20;
+    top: 18px;
+    right: 28px;
+    left: 132px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 76px;
+    padding: 12px 22px;
+    border-radius: 22px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    border: 0;
+    color: var(--text);
+    background: transparent;
+    text-align: left;
+}
+
+.brand-mark {
+    display: grid;
+    width: 43px;
+    height: 43px;
+    place-items: center;
+    border-radius: 14px;
+    color: #07101e;
+    background: linear-gradient(135deg, var(--accent), #2682ff);
+    box-shadow: 0 0 20px rgba(79, 195, 255, 0.5);
+}
+
+.brand strong {
+    display: block;
+    font-size: 21px;
+    line-height: 1;
+}
+
+.brand small {
+    display: block;
+    margin-top: 5px;
+    color: var(--accent);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+.top-search {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 10px;
+    max-width: 470px;
+    padding: 12px 15px;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    color: var(--subtle);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.top-search input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    color: var(--text);
+    background: transparent;
+}
+
+.top-search input::placeholder {
+    color: var(--subtle);
+}
+
+.top-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-button,
+.theme-button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    color: var(--muted);
+    background: transparent;
+}
+
+.icon-button:hover,
+.theme-button:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.profile-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    color: var(--text);
+    background: transparent;
+    font-weight: 600;
+}
+
+.avatar {
+    display: grid;
+    width: 34px;
+    height: 34px;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--text);
+    background: linear-gradient(135deg, #374b89, #1a213f);
+}
+
+.sidebar {
+    position: fixed;
+    z-index: 25;
+    top: 50%;
+    left: 24px;
+    display: flex;
+    width: 82px;
+    padding: 18px 10px;
+    border-radius: 28px;
+    transform: translateY(-42%);
+}
+
+.sidebar-nav {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 11px;
+}
+
+.nav-item {
+    position: relative;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 4px;
+    border: 1px solid transparent;
+    border-radius: 17px;
+    color: var(--subtle);
+    background: transparent;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    color: var(--accent);
+    border-color: var(--border);
+    background: var(--accent-soft);
+    box-shadow: 0 0 18px rgba(79, 195, 255, 0.18);
+}
+
+.nav-label {
+    font-size: 9px;
+}
+
+.nav-icon {
+    position: relative;
+}
+
+.nav-count {
+    position: absolute;
+    top: -8px;
+    right: -9px;
+    display: grid;
+    min-width: 17px;
+    height: 17px;
+    padding: 0 4px;
+    place-items: center;
+    border-radius: 99px;
+    color: #06101e;
+    background: var(--accent);
+    font-size: 9px;
+}
+
+.mobile-nav {
+    display: none;
+}
+
+@media (max-width: 760px) {
+    .topbar {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        height: auto;
+        padding: 10px 12px;
+    }
+
+    .brand strong {
+        font-size: 17px;
+    }
+
+    .brand small,
+    .profile-chip span:last-child,
+    .top-actions .icon-button {
+        display: none;
+    }
+
+    .brand-mark {
+        width: 37px;
+        height: 37px;
+    }
+
+    .top-search {
+        order: 3;
+        width: 100%;
+        max-width: none;
+        flex-basis: 100%;
+    }
+
+    .topbar {
+        flex-wrap: wrap;
+    }
+
+    .sidebar {
+        display: none;
+    }
+
+    .mobile-nav {
+        position: fixed;
+        z-index: 30;
+        right: 10px;
+        bottom: 10px;
+        left: 10px;
+        display: flex;
+        justify-content: space-around;
+        padding: 8px 5px;
+        border-radius: 20px;
+    }
+
+    .mobile-nav-item {
+        display: flex;
+        min-width: 48px;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        border: 0;
+        color: var(--subtle);
+        background: transparent;
+    }
+
+    .mobile-nav-item.active {
+        color: var(--accent);
+    }
+
+    .mobile-icon {
+        position: relative;
+    }
+
+    .mobile-nav-item small {
+        font-size: 9px;
+    }
+}

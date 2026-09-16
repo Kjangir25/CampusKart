@@ -1,0 +1,230 @@
+.sell-page {
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+.sell-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 22px;
+}
+
+.sell-form,
+.smart-price-card {
+    padding: 22px;
+}
+
+.sell-form {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+}
+
+.sell-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.sell-form input,
+.sell-form select,
+.sell-form textarea {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    outline: 0;
+    color: var(--text);
+    background: var(--panel2);
+}
+
+.sell-form input,
+.sell-form select {
+    height: 45px;
+    padding: 0 13px;
+}
+
+.sell-form textarea {
+    padding: 13px;
+    resize: vertical;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.currency-input {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-left: 13px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--accent);
+    background: var(--panel2);
+}
+
+.currency-input input {
+    border: 0;
+    padding-left: 0;
+}
+
+.submit-listing {
+    width: fit-content;
+    margin-top: 4px;
+}
+
+.sell-side {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.upload-box {
+    display: flex;
+    min-height: 245px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    overflow: hidden;
+    color: var(--accent);
+    border-style: dashed;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-box input {
+    display: none;
+}
+
+.upload-box strong {
+    color: var(--text);
+    font-size: 14px;
+}
+
+.upload-box span {
+    color: var(--subtle);
+    font-size: 11px;
+}
+
+.upload-box img {
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+}
+
+.image-message {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    color: var(--danger);
+    font-size: 12px;
+}
+
+.image-message.good {
+    color: var(--success);
+}
+
+.smart-price-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 13px;
+}
+
+.smart-price-icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border-radius: 14px;
+    color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.smart-price-card h3,
+.smart-price-card p {
+    margin: 0;
+}
+
+.smart-price-card h3 {
+    font-size: 14px;
+}
+
+.smart-price-card p {
+    margin-top: 6px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.smart-price-card button {
+    grid-column: 1 / -1;
+    padding: 11px;
+    border: 1px solid var(--accent);
+    border-radius: 11px;
+    color: var(--accent);
+    background: transparent;
+    font-weight: 700;
+}
+
+.smart-price-card button:hover {
+    color: #06101e;
+    background: var(--accent);
+}
+
+.suggested-price {
+    grid-column: 1 / -1;
+    color: var(--success);
+    font-size: 13px;
+}
+
+.success-page {
+    display: grid;
+    min-height: 60vh;
+    place-items: center;
+}
+
+.success-card {
+    display: flex;
+    max-width: 460px;
+    flex-direction: column;
+    align-items: center;
+    gap: 13px;
+    padding: 42px;
+    text-align: center;
+}
+
+.success-card>svg {
+    color: var(--success);
+}
+
+.success-card h1,
+.success-card p {
+    margin: 0;
+}
+
+.success-card p {
+    color: var(--muted);
+}
+
+@media (max-width: 800px) {
+    .sell-layout {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 500px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .submit-listing {
+        width: 100%;
+    }
+}

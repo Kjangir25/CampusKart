@@ -1,0 +1,9 @@
+.wishlist-page {
+    max-width: 1420px;
+    margin: 0 auto;
+}
+
+.wishlist-page .page-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
