@@ -1,5 +1,5 @@
 import { ShoppingBag, Github, Linkedin, Mail, MapPin } from "lucide-react";
-import "./Footer.css";
+import "./footer.css";
 
 function Footer({ go }) {
     return (
