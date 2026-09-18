@@ -170,8 +170,8 @@ function App() {
   return (
     <div className="app-shell">
       <Navbar page={page} go={go} cartCount={cartCount} wishlistCount={wishlist.length} theme={theme} setTheme={setTheme} search={search} setSearch={setSearch} user={user} />
-      <Footer go={go} />
       <main className="app-main">{renderPage()}</main>
+      <Footer go={go} />
     </div>
   );
 }
