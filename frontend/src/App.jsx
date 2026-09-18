@@ -8,6 +8,7 @@ import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile"; // NAYA ADD KIYA
+import Footer from "./components/footer";
 import "./App.css";
 
 export const productsData = [ /* tera wahi productsData yaha rahega - same as before */
@@ -169,6 +170,7 @@ function App() {
   return (
     <div className="app-shell">
       <Navbar page={page} go={go} cartCount={cartCount} wishlistCount={wishlist.length} theme={theme} setTheme={setTheme} search={search} setSearch={setSearch} user={user} />
+      <Footer go={go} />
       <main className="app-main">{renderPage()}</main>
     </div>
   );
