@@ -1,24 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import {
-  ArrowRight,
-  Bell,
-  BookOpen,
-  CheckCircle2,
-  Laptop,
-  Moon,
-  Search,
-  ShoppingBag,
-  Sparkles,
-  Sun,
-  UserRound,
-  Heart,
-  MessageCircle,
-  Sofa,
-  Shirt,
-  PenLine
-} from "lucide-react";
 import Navbar from "./components/Navbar";
-import ProductCard from "./components/ProductCard";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import Detail from "./pages/Detail";
@@ -26,9 +7,10 @@ import Sell from "./pages/Sell";
 import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
+import Profile from "./pages/Profile"; // NAYA ADD KIYA
 import "./App.css";
 
-export const productsData = [
+export const productsData = [ /* tera wahi productsData yaha rahega - same as before */
   {
     id: 1,
     title: "Engineering Physics Textbook",
@@ -120,48 +102,23 @@ export const productsData = [
 ];
 
 const readStorage = (key, fallback) => {
-  try {
-    return JSON.parse(localStorage.getItem(key)) || fallback;
-  } catch {
-    return fallback;
-  }
+  try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
 };
 
 function App() {
   const [page, setPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("All"); // NAYA
   const [cart, setCart] = useState(() => readStorage("campuskart-cart", []));
-  const [wishlist, setWishlist] = useState(() =>
-    readStorage("campuskart-wish", [])
-  );
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("campuskart-theme") || "dark"
-  );
+  const [wishlist, setWishlist] = useState(() => readStorage("campuskart-wish", []));
+  const [theme, setTheme] = useState(() => localStorage.getItem("campuskart-theme") || "dark");
   const [search, setSearch] = useState("");
-  const [user, setUser] = useState(() =>
-    readStorage("campuskart-user", {
-      name: "Alex",
-      branch: "CSE",
-      verified: true
-    })
-  );
+  const [user, setUser] = useState(() => readStorage("campuskart-user", { name: "Alex", branch: "CSE", verified: true }));
 
-  useEffect(() => {
-    localStorage.setItem("campuskart-cart", JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
-    localStorage.setItem("campuskart-wish", JSON.stringify(wishlist));
-  }, [wishlist]);
-
-  useEffect(() => {
-    localStorage.setItem("campuskart-theme", theme);
-    document.documentElement.dataset.theme = theme;
-  }, [theme]);
-
-  useEffect(() => {
-    localStorage.setItem("campuskart-user", JSON.stringify(user));
-  }, [user]);
+  useEffect(() => { localStorage.setItem("campuskart-cart", JSON.stringify(cart)); }, [cart]);
+  useEffect(() => { localStorage.setItem("campuskart-wish", JSON.stringify(wishlist)); }, [wishlist]);
+  useEffect(() => { localStorage.setItem("campuskart-theme", theme); document.documentElement.dataset.theme = theme; }, [theme]);
+  useEffect(() => { localStorage.setItem("campuskart-user", JSON.stringify(user)); }, [user]);
 
   const go = (nextPage, product = null) => {
     setSelectedProduct(product);
@@ -169,110 +126,51 @@ function App() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const isWishlisted = (productId) =>
-    wishlist.some((product) => product.id === productId);
-
+  const isWishlisted = (id) => wishlist.some((p) => p.id === id);
   const toggleWishlist = (product) => {
-    setWishlist((current) =>
-      isWishlisted(product.id)
-        ? current.filter((item) => item.id !== product.id)
-        : [...current, product]
-    );
+    setWishlist((c) => isWishlisted(product.id) ? c.filter((i) => i.id !== product.id) : [...c, product]);
   };
-
   const addToCart = (product) => {
-    setCart((current) => {
-      const existing = current.find((item) => item.id === product.id);
-
-      if (existing) {
-        return current.map((item) =>
-          item.id === product.id
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-      }
-
-      return [...current, { ...product, quantity: 1 }];
+    setCart((c) => {
+      const ex = c.find((i) => i.id === product.id);
+      if (ex) return c.map((i) => i.id === product.id ? { ...i, quantity: i.quantity + 1 } : i);
+      return [...c, { ...product, quantity: 1 }];
     });
   };
+  const updateQuantity = (id, q) => setCart((c) => c.map((i) => i.id === id ? { ...i, quantity: q } : i).filter((i) => i.quantity > 0));
+  const removeFromCart = (id) => setCart((c) => c.filter((i) => i.id !== id));
+  const cartCount = cart.reduce((t, i) => t + i.quantity, 0);
 
-  const updateQuantity = (productId, quantity) => {
-    setCart((current) =>
-      current
-        .map((item) =>
-          item.id === productId ? { ...item, quantity } : item
-        )
-        .filter((item) => item.quantity > 0)
-    );
-  };
-
-  const removeFromCart = (productId) => {
-    setCart((current) => current.filter((item) => item.id !== productId));
-  };
-
-  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
-
+  // CATEGORY + SEARCH DONO KA FILTER
   const visibleProducts = useMemo(() => {
-    if (!search.trim()) return productsData;
-
-    return productsData.filter((product) =>
-      `${product.title} ${product.category} ${product.branch}`
-        .toLowerCase()
-        .includes(search.toLowerCase())
-    );
-  }, [search]);
+    let filtered = productsData;
+    if (selectedCategory !== "All") {
+      filtered = filtered.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
+    }
+    if (search.trim()) {
+      filtered = filtered.filter((p) => `${p.title} ${p.category} ${p.branch}`.toLowerCase().includes(search.toLowerCase()));
+    }
+    return filtered;
+  }, [search, selectedCategory]);
 
   const renderPage = () => {
-    const commonProps = {
-      products: visibleProducts,
-      allProducts: productsData,
-      cart,
-      wishlist,
-      user,
-      search,
-      setSearch,
-      go,
-      addToCart,
-      updateQuantity,
-      removeFromCart,
-      toggleWishlist,
-      isWishlisted,
-      setUser
-    };
+    const commonProps = { products: visibleProducts, allProducts: productsData, cart, wishlist, user, search, setSearch, go, addToCart, updateQuantity, removeFromCart, toggleWishlist, isWishlisted, setUser, selectedCategory, setSelectedCategory };
 
     if (page === "shop") return <Shop {...commonProps} />;
-    if (page === "detail")
-      return (
-        <Detail
-          {...commonProps}
-          product={selectedProduct || productsData[0]}
-        />
-      );
+    if (page === "detail") return <Detail {...commonProps} product={selectedProduct || productsData[0]} />;
     if (page === "sell") return <Sell {...commonProps} />;
-    if (page === "chat") return <Chat {...commonProps} />;
+    if (page === "chat") return <Chat {...commonProps} product={selectedProduct} />; // PRODUCT PASS KIYA
     if (page === "cart") return <Cart {...commonProps} />;
     if (page === "wishlist") return <Wishlist {...commonProps} />;
-
+    if (page === "profile") return <Profile {...commonProps} />; // PROFILE PAGE ADDED
     return <Home {...commonProps} />;
   };
 
   return (
     <div className="app-shell">
-      <Navbar
-        page={page}
-        go={go}
-        cartCount={cartCount}
-        wishlistCount={wishlist.length}
-        theme={theme}
-        setTheme={setTheme}
-        search={search}
-        setSearch={setSearch}
-        user={user}
-      />
-
+      <Navbar page={page} go={go} cartCount={cartCount} wishlistCount={wishlist.length} theme={theme} setTheme={setTheme} search={search} setSearch={setSearch} user={user} />
       <main className="app-main">{renderPage()}</main>
     </div>
   );
 }
-
 export default App;

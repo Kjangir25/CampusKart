@@ -1,11 +1,12 @@
-import { ArrowLeft, MoreVertical, Paperclip, Send, UserRound } from "lucide-react";
-import { useState } from "react";
+import { ArrowLeft, MoreVertical, Paperclip, Send } from "lucide-react";
+import { useEffect, useState } from "react";
 import "./Chat.css";
 
 const initialChats = [
     {
         id: 1,
         name: "Riya Sharma",
+        productId: 2,
         product: "AirPods Pro 2nd Generation",
         last: "Is pickup near the library okay?",
         time: "10:42 AM",
@@ -18,6 +19,7 @@ const initialChats = [
     {
         id: 2,
         name: "Kabir Singh",
+        productId: 3,
         product: "Study Table Lamp",
         last: "Thanks!",
         time: "Yesterday",
@@ -29,29 +31,59 @@ const initialChats = [
     }
 ];
 
-function Chat() {
-    const [chats, setChats] = useState(initialChats);
-    const [activeId, setActiveId] = useState(1);
+function Chat({ product }) {
+    const [chats, setChats] = useState(() => {
+        try {
+            const saved = JSON.parse(localStorage.getItem("campuskart-chats"));
+            return saved || initialChats;
+        } catch { return initialChats; }
+    });
+    const [activeId, setActiveId] = useState(initialChats[0].id);
     const [message, setMessage] = useState("");
 
-    const activeChat = chats.find((chat) => chat.id === activeId);
+    // NAYA PRODUCT AATE HI USKI ALAG CHAT BANAO
+    useEffect(() => {
+        if (product) {
+            setChats((curr) => {
+                const exists = curr.find(c => c.productId === product.id);
+                if (exists) {
+                    setActiveId(exists.id);
+                    return curr;
+                }
+                const newChat = {
+                    id: Date.now(),
+                    name: product.seller,
+                    productId: product.id,
+                    product: product.title,
+                    last: `Chat started for ${product.title}`,
+                    time: "Now",
+                    messages: [
+                        { from: "them", text: `Hi, regarding ${product.title} - is it still available?` }
+                    ]
+                };
+                setActiveId(newChat.id);
+                return [newChat,...curr];
+            });
+        }
+    }, [product]);
+
+    useEffect(() => {
+        localStorage.setItem("campuskart-chats", JSON.stringify(chats));
+    }, [chats]);
+
+    const activeChat = chats.find((chat) => chat.id === activeId) || chats[0];
+    if (!activeChat) return null;
 
     const sendMessage = (event) => {
         event.preventDefault();
         if (!message.trim()) return;
-
         setChats((current) =>
             current.map((chat) =>
                 chat.id === activeId
-                    ? {
-                        ...chat,
-                        last: message,
-                        messages: [...chat.messages, { from: "me", text: message }]
-                    }
+                   ? {...chat, last: message, messages: [...chat.messages, { from: "me", text: message }] }
                     : chat
             )
         );
-
         setMessage("");
     };
 
@@ -60,7 +92,7 @@ function Chat() {
             <div className="page-heading">
                 <div>
                     <span className="eyebrow">Student-to-student communication</span>
-                    <h1>Messages</h1>
+                    <h1>Messages {product? `- ${product.title}` : ''}</h1>
                 </div>
             </div>
 
@@ -70,11 +102,10 @@ function Chat() {
                         <strong>Recent chats</strong>
                         <span>{chats.length}</span>
                     </div>
-
                     {chats.map((chat) => (
                         <button
                             key={chat.id}
-                            className={`chat-preview ${activeId === chat.id ? "active" : ""}`}
+                            className={`chat-preview ${activeId === chat.id? "active" : ""}`}
                             onClick={() => setActiveId(chat.id)}
                         >
                             <span className="chat-avatar">{chat.name.charAt(0)}</span>
@@ -106,27 +137,16 @@ function Chat() {
                     <div className="messages">
                         <div className="chat-date">Today</div>
                         {activeChat.messages.map((item, index) => (
-                            <div
-                                key={`${item.text}-${index}`}
-                                className={`message ${item.from === "me" ? "mine" : ""}`}
-                            >
+                            <div key={`${item.text}-${index}`} className={`message ${item.from === "me"? "mine" : ""}`}>
                                 {item.text}
                             </div>
                         ))}
                     </div>
 
                     <form className="message-form" onSubmit={sendMessage}>
-                        <button type="button" aria-label="Attach file">
-                            <Paperclip size={18} />
-                        </button>
-                        <input
-                            value={message}
-                            onChange={(event) => setMessage(event.target.value)}
-                            placeholder="Write a message..."
-                        />
-                        <button type="submit" className="send-button">
-                            <Send size={18} />
-                        </button>
+                        <button type="button" aria-label="Attach file"><Paperclip size={18} /></button>
+                        <input value={message} onChange={(e) => setMessage(e.target.value)} placeholder={`Message ${activeChat.name}...`} />
+                        <button type="submit" className="send-button"><Send size={18} /></button>
                     </form>
                 </section>
             </div>

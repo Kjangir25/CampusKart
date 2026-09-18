@@ -68,7 +68,8 @@ function Navbar({
             {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
           </button>
 
-          <button className="profile-chip">
+          {/* FIX 1 - PROFILE CLICK ADDED */}
+          <button className="profile-chip" onClick={() => go("profile")}>
             <span className="avatar">
               <UserRound size={17} />
             </span>

@@ -1,4 +1,4 @@
-import { ArrowLeft, Heart, MessageCircle, ShieldCheck, ShoppingCart, Star, UserRound } from "lucide-react";
+import { ArrowLeft, Heart, MessageCircle, ShieldCheck, ShoppingCart, Star } from "lucide-react";
 import "./Detail.css";
 
 function Detail({
@@ -52,7 +52,8 @@ function Detail({
                                 <ShieldCheck size={14} /> Verified seller
                             </span>
                         </div>
-                        <button onClick={() => go("chat")}>
+                        {/* FIX 1 - product pass kiya */}
+                        <button onClick={() => go("chat", product)}>
                             <MessageCircle size={17} />
                             Chat
                         </button>
@@ -92,18 +93,15 @@ function Detail({
                         </button>
 
                         <button
-                            className={`wishlist-detail-button ${isWishlisted(product.id) ? "liked" : ""
-                                }`}
+                            className={`wishlist-detail-button ${isWishlisted(product.id) ? "liked" : ""}`}
                             onClick={() => toggleWishlist(product)}
                         >
-                            <Heart
-                                size={19}
-                                fill={isWishlisted(product.id) ? "currentColor" : "none"}
-                            />
+                            <Heart size={19} fill={isWishlisted(product.id) ? "currentColor" : "none"} />
                             {isWishlisted(product.id) ? "Saved" : "Wishlist"}
                         </button>
 
-                        <button className="chat-seller-button" onClick={() => go("chat")}>
+                        {/* FIX 2 - yaha bhi product pass kiya */}
+                        <button className="chat-seller-button" onClick={() => go("chat", product)}>
                             <MessageCircle size={18} />
                             Chat with Seller
                         </button>
