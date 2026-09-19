@@ -1,87 +1,85 @@
-.footer {
-    margin-left: 88px !important;
-    width: calc(100% - 88px) !important;
-    background: #0a0e26 !important;
-    padding: 24px 32px !important;
-    box-sizing: border-box !important;
-    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    position: relative !important;
-    z-index: 1 !important;
-    min-height: auto !important;
-    height: auto !important;
+.ck-footer {
+    margin-left: 92px;
+    width: calc(100% - 92px);
+    background: #080b1f;
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 22px 32px;
+    box-sizing: border-box;
 }
 
-.footer-content {
-    display: flex !important;
-    justify-content: space-between !important;
-    align-items: flex-start !important;
-    gap: 32px !important;
-    max-width: 1200px !important;
-    margin: 0 auto !important;
+.ck-footer-inner {
+    display: grid;
+    grid-template-columns: 1.8fr 0.7fr 0.9fr 1fr;
+    gap: 24px;
+    max-width: 1300px;
+    margin: 0 auto;
+    align-items: start;
 }
 
-.footer-left {
-    flex: 1.5;
+.ck-footer-brand {
+    display: flex;
+    gap: 12px;
 }
 
-.footer-left h3 {
-    color: #fff !important;
-    font-size: 18px !important;
-    margin: 0 0 4px 0 !important;
+.ck-footer-logo {
+    width: 38px;
+    height: 38px;
+    background: #e0f2ff;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
 }
 
-.footer-left p {
-    margin: 3px 0 !important;
-    font-size: 13px !important;
-    color: #9aa0c0 !important;
+.ck-footer-brand h3 {
+    color: #fff;
+    margin: 0;
+    font-size: 17px;
 }
 
-.footer-tagline {
-    margin-top: 10px !important;
+.ck-footer-brand span {
+    color: #9aa0c0;
+    font-size: 12px;
+    display: block;
+    margin-top: 2px;
+}
+
+.ck-copy {
+    color: #6b7394 !important;
     font-size: 11px !important;
-    opacity: 0.6 !important;
+    margin-top: 14px !important;
 }
 
-.footer-links {
-    display: flex !important;
-    gap: 48px !important;
-    flex: 2;
-    justify-content: flex-end;
+.ck-footer-col h4 {
+    color: #fff;
+    font-size: 13px;
+    margin: 0 0 10px 0;
 }
 
-.footer-links h4 {
-    color: #fff !important;
-    font-size: 13px !important;
-    margin: 0 0 10px 0 !important;
-    font-weight: 600;
-}
-
-/* Yahi tera main fix hai - white box hatane ke liye */
-.footer-links a,
-.footer-links p {
-    display: block !important;
-    background: transparent !important;
-    border: none !important;
-    padding: 0 !important;
-    margin: 6px 0 !important;
-    font-size: 13px !important;
-    color: #9aa0c0 !important;
-    box-shadow: none !important;
+.ck-footer-col span,
+.ck-footer-col p {
+    display: block;
+    color: #8a90b5;
+    font-size: 12.5px;
+    margin: 7px 0;
     cursor: pointer;
 }
 
-.footer-links a:hover {
-    color: #fff !important;
+.ck-footer-col span:hover {
+    color: #fff;
 }
 
-@media (max-width: 768px) {
-    .footer {
-        margin-left: 0 !important;
-        width: 100% !important;
-        padding-bottom: 80px !important;
+@media(max-width: 900px) {
+    .ck-footer {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px 16px 80px 16px;
     }
 
-    .footer-content {
-        flex-direction: column !important;
+    .ck-footer-inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .ck-footer-brand {
+        grid-column: 1 / -1;
     }
 }

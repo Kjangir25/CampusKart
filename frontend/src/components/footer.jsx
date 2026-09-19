@@ -1,49 +1,40 @@
-import { ShoppingBag, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import "./footer.css";
 
-function Footer({ go }) {
+const Footer = () => {
     return (
-        <footer className="footer glass">
-            <div className="footer-top">
-                <div className="footer-brand">
-                    <span className="brand-mark"><ShoppingBag size={22} /></span>
+        <footer className="ck-footer">
+            <div className="ck-footer-inner">
+                <div className="ck-footer-brand">
+                    <div className="ck-footer-logo">📦</div>
                     <div>
-                        <strong>CampusKart</strong>
-                        <small>Midnight Archive - Student Marketplace</small>
+                        <h3>CampusKart</h3>
+                        <span>Midnight Archive - Student Marketplace</span>
+                        <p className="ck-copy">© 2026 CampusKart • Built for students, by students</p>
                     </div>
                 </div>
 
-                <div className="footer-links">
-                    <div>
-                        <h4>Explore</h4>
-                        <button onClick={() => go("home")}>Home</button>
-                        <button onClick={() => go("shop")}>Shop</button>
-                        <button onClick={() => go("sell")}>Sell</button>
-                    </div>
-                    <div>
-                        <h4>Support</h4>
-                        <button>Help Center</button>
-                        <button>Safe Trade</button>
-                        <button>Contact Us</button>
-                    </div>
-                    <div>
-                        <h4>Campus</h4>
-                        <p><MapPin size={14} /> Bhojasar, Rajasthan</p>
-                        <p><Mail size={14} /> support@campuskart.com</p>
-                    </div>
+                <div className="ck-footer-col">
+                    <h4>Explore</h4>
+                    <span>Home</span>
+                    <span>Shop</span>
+                    <span>Sell</span>
                 </div>
-            </div>
 
-            <div className="footer-bottom">
-                <span>© 2026 CampusKart • Built for students, by students</span>
-                <div className="footer-social">
-                    <a href="https://github.com" target="_blank"><Github size={18} /></a>
-                    <a href="https://linkedin.com" target="_blank"><Linkedin size={18} /></a>
-                    <a href="mailto:support@campuskart.com"><Mail size={18} /></a>
+                <div className="ck-footer-col">
+                    <h4>Support</h4>
+                    <span>Help Center</span>
+                    <span>Safe Trade</span>
+                    <span>Contact Us</span>
+                </div>
+
+                <div className="ck-footer-col">
+                    <h4>Campus</h4>
+                    <p>📍 Bhojasar, Rajasthan</p>
+                    <p>✉️ support@campuskart.com</p>
                 </div>
             </div>
         </footer>
     );
-}
+};
 
 export default Footer;
