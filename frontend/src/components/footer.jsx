@@ -1,4 +1,5 @@
 import "./footer.css";
+import { ShoppingBag } from "lucide-react";
 
 const Footer = () => {
     return (
