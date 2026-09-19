@@ -4,11 +4,15 @@ const Footer = () => {
     return (
         <footer className="ck-footer">
             <div className="ck-footer-inner">
-                <div className="ck-footer-brand">
-                    <div className="ck-footer-logo">📦</div>
+                <div className="brand" >
+                    <span className="brand-mark">
+                        <ShoppingBag size={22} />
+                    </span>
                     <div>
-                        <h3>CampusKart</h3>
-                        <span>Midnight Archive - Student Marketplace</span>
+                        <span>
+                            <strong>CampusKart</strong>
+                            <small>Midnight Archive</small>
+                        </span>
                         <p className="ck-copy">© 2026 CampusKart • Built for students, by students</p>
                     </div>
                 </div>
