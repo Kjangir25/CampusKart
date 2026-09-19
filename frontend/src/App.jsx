@@ -7,7 +7,7 @@ import Sell from "./pages/Sell";
 import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
-import Profile from "./pages/profile";
+import Profile from "./pages/Profile";
 import Footer from "./components/footer";
 import "./App.css";
 
