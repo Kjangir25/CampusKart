@@ -1,7 +1,9 @@
 import "./footer.css";
 import { ShoppingBag } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Footer = () => {
+    const navigate = useNavigate();
     return (
         <footer className="ck-footer">
             <div className="ck-footer-inner">
@@ -20,9 +22,9 @@ const Footer = () => {
 
                 <div className="ck-footer-col">
                     <h4>Explore</h4>
-                    <span>Home</span>
-                    <span>Shop</span>
-                    <span>Sell</span>
+                    <span onClick={() => navigate("/")}>Home</span>
+                    <span onClick={() => navigate("/shop")}>Shop</span>
+                    <span onClick={() => navigate("/sell")}>Sell</span>
                 </div>
 
                 <div className="ck-footer-col">

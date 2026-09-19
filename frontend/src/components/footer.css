@@ -57,7 +57,10 @@
     margin: 0 0 10px 0;
 }
 
-.ck-footer-col span,
+.ck-footer-col span {
+    cursor: pointer;
+}
+
 .ck-footer-col p {
     display: block;
     color: #8a90b5;
