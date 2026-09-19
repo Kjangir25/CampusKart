@@ -1,6 +1,6 @@
 .footer {
     width: calc(100% - 80px);
-    margin-left: 80px;
+    margin-left: 70px;
     background: #0a0e2a;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding: 30px 40px;
