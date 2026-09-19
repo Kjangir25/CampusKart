@@ -16,10 +16,7 @@
     align-items: start;
 }
 
-.ck-footer-brand {
-    display: flex;
-    gap: 12px;
-}
+
 
 .brand-mark {
     display: grid;
