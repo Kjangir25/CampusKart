@@ -1,70 +1,87 @@
 .footer {
-    width: calc(100% - 80px);
-    margin :0 auto;
-    background: #0a0e2a;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 30px 40px;
-    color: #a0a0c0;
-    box-sizing: border-box;
+    margin-left: 88px !important;
+    width: calc(100% - 88px) !important;
+    background: #0a0e26 !important;
+    padding: 24px 32px !important;
+    box-sizing: border-box !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+    position: relative !important;
+    z-index: 1 !important;
+    min-height: auto !important;
+    height: auto !important;
 }
 
 .footer-content {
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: flex-start !important;
+    gap: 32px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+.footer-left {
+    flex: 1.5;
 }
 
 .footer-left h3 {
-    color: white;
-    margin: 0 0 5px 0;
+    color: #fff !important;
+    font-size: 18px !important;
+    margin: 0 0 4px 0 !important;
 }
 
 .footer-left p {
-    margin: 4px 0;
-    font-size: 14px;
+    margin: 3px 0 !important;
+    font-size: 13px !important;
+    color: #9aa0c0 !important;
 }
 
 .footer-tagline {
-    margin-top: 15px !important;
-    font-size: 12px !important;
-    opacity: 0.7;
+    margin-top: 10px !important;
+    font-size: 11px !important;
+    opacity: 0.6 !important;
 }
 
 .footer-links {
-    display: flex;
-    gap: 50px;
+    display: flex !important;
+    gap: 48px !important;
+    flex: 2;
+    justify-content: flex-end;
 }
 
 .footer-links h4 {
-    color: white;
-    font-size: 14px;
-    margin-bottom: 10px;
+    color: #fff !important;
+    font-size: 13px !important;
+    margin: 0 0 10px 0 !important;
+    font-weight: 600;
 }
 
+/* Yahi tera main fix hai - white box hatane ke liye */
 .footer-links a,
 .footer-links p {
-    display: block;
-    font-size: 13px;
-    margin: 6px 0;
+    display: block !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 6px 0 !important;
+    font-size: 13px !important;
+    color: #9aa0c0 !important;
+    box-shadow: none !important;
     cursor: pointer;
+}
+
+.footer-links a:hover {
+    color: #fff !important;
 }
 
 @media (max-width: 768px) {
     .footer {
-        width: 100%;
-        margin-left: 0;
-        padding: 20px;
-        margin-bottom: 70px;
+        margin-left: 0 !important;
+        width: 100% !important;
+        padding-bottom: 80px !important;
     }
 
     .footer-content {
-        flex-direction: column;
-    }
-
-    .footer-links {
-        gap: 25px;
-        flex-wrap: wrap;
+        flex-direction: column !important;
     }
 }
