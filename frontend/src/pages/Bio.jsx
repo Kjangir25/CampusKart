@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./profile.css";
+import "./Bio.css";
 
 const Profile = ({ go, user, setUser }) => {
     const saved = JSON.parse(localStorage.getItem("userProfile"));
