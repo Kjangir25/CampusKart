@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media (max-width: 768px) {
+
+    .header,
+    .navbar {
+        padding: 10px 14px !important;
+        gap: 10px;
+    }
+
+    .nav-links,
+    .desktop-search {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: flex !important;
+    }
+
+    .header-actions {
+        gap: 8px !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .hero,
+    .hero-section {
+        flex-direction: column !important;
+        padding: 20px 14px !important;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 26px !important;
+        line-height: 1.2;
+    }
+
+    .hero p {
+        font-size: 14px !important;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .stats,
+    .features {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+    }
+
+    .products-grid,
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .page {
+        padding: 14px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .shop-layout {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-card img {
+        height: 140px !important;
+        object-fit: cover;
+    }
+
+    .product-card {
+        padding: 8px !important;
+    }
+
+    .product-card h3 {
+        font-size: 13px !important;
+    }
+
+    .product-card .price {
+        font-size: 14px !important;
+    }
+
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .cart-layout,
+    .form-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .sell-form,
+    .checkout-card {
+        padding: 16px !important;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px !important;
+        /* iPhone zoom rokta hai */
+    }
+
+    button {
+        min-height: 44px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Search bar fix */
+    .search-bar,
+    .search-container,
+    div:has(> input[placeholder*="Search"]) {
+        margin: 8px 12px !important;
+    }
+
+    input[placeholder*="Search textbooks"] {
+        height: 36px !important;
+        font-size: 12px !important;
+        padding: 0 12px 0 36px !important;
+        border-radius: 12px !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Hero text thoda upar lao taaki cut na ho */
+    .hero,
+    .hero-section {
+        padding-top: 10px !important;
+    }
+
+    .hero h1,
+    h1 {
+        font-size: 28px !important;
+        line-height: 1.1 !important;
+        margin-bottom: 8px !important;
+    }
+
+    .hero p {
+        font-size: 12px !important;
+        line-height: 1.4 !important;
+        opacity: 0.8;
+        padding: 0 10px;
+    }
+
+    /* Buttons chote */
+    .hero-buttons,
+    .cta-buttons {
+        gap: 10px !important;
+        margin-top: 16px !important;
+    }
+
+    .hero-buttons button {
+        padding: 10px 18px !important;
+        font-size: 13px !important;
+        border-radius: 20px !important;
+    }
+}

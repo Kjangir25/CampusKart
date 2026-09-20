@@ -177,3 +177,25 @@ css .product-card {
     color: #06101e;
     background: var(--accent);
 }
+
+.product-image-wrap {
+    position: relative;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: #ff3b30;
+    color: white;
+    border: 0;
+    border-radius: 8px;
+    padding: 7px 9px;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+}
+
+.delete-btn:hover {
+    background: #e32b22;
+}

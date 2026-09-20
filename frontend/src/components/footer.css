@@ -59,6 +59,8 @@
 
 .ck-footer-col span {
     cursor: pointer;
+    color: #8a90b5;
+    font-size: 12.5px;
 }
 
 .ck-footer-col p {

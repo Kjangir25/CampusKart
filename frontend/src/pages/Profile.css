@@ -20,36 +20,13 @@
 .profile-card h2 {
     margin: 0;
     font-size: 22px;
+    color: #5b6cff;
 }
 
 .profile-card.sub {
     color: #8a90b5;
     font-size: 13px;
     margin: 4px 0 20px 0;
-}
-
-.pic-section {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 22px;
-}
-
-.pic-section img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #2a2f5a;
-}
-
-.pic-btn {
-    background: #1e2350;
-    color: #fff;
-    padding: 7px 14px;
-    border-radius: 20px;
-    font-size: 12px;
-    cursor: pointer;
 }
 
 .form-grid {

@@ -1,9 +1,7 @@
 import "./footer.css";
 import { ShoppingBag } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
-const Footer = () => {
-    const navigate = useNavigate();
+const Footer = ({go}) => {
     return (
         <footer className="ck-footer">
             <div className="ck-footer-inner">
@@ -22,21 +20,21 @@ const Footer = () => {
 
                 <div className="ck-footer-col">
                     <h4>Explore</h4>
-                    <span onClick={() => navigate("/")}>Home</span>
-                    <span onClick={() => navigate("/shop")}>Shop</span>
-                    <span onClick={() => navigate("/sell")}>Sell</span>
+                    <span onClick={() => go("home")}>Home</span><br></br>
+                    <span onClick={() => go("shop")}>Shop</span><br></br>
+                    <span onClick={() => go("sell")}>Sell</span>
                 </div>
 
                 <div className="ck-footer-col">
                     <h4>Support</h4>
-                    <span>Help Center</span>
-                    <span>Safe Trade</span>
+                    <span>Help Center</span><br></br>
+                    <span>Safe Trade</span><br></br>
                     <span>Contact Us</span>
                 </div>
 
                 <div className="ck-footer-col">
                     <h4>Campus</h4>
-                    <p>📍 Bhojasar, Rajasthan</p>
+                    <p>📍 Jhunjhunu, Rajasthan</p>
                     <p>✉️ support@campuskart.com</p>
                 </div>
             </div>

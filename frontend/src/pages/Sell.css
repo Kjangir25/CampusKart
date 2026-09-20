@@ -1,23 +1,34 @@
 .sell-page {
     max-width: 1150px;
     margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding: 0 16px;
 }
 
 .sell-layout {
     display: grid;
     grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
     gap: 22px;
+    width: 100%;
 }
 
 .sell-form,
 .smart-price-card {
     padding: 22px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    /* ye sabse important fix hai */
 }
 
 .sell-form {
     display: flex;
     flex-direction: column;
     gap: 19px;
+    overflow: hidden;
 }
 
 .sell-form label {
@@ -27,17 +38,22 @@
     color: var(--muted);
     font-size: 12px;
     font-weight: 600;
+    width: 100%;
+    min-width: 0;
 }
 
 .sell-form input,
 .sell-form select,
 .sell-form textarea {
     width: 100%;
+    max-width: 100%;
     border: 1px solid var(--border);
     border-radius: 12px;
     outline: 0;
     color: var(--text);
     background: var(--panel2);
+    box-sizing: border-box;
+    /* fix */
 }
 
 .sell-form input,
@@ -49,12 +65,16 @@
 .sell-form textarea {
     padding: 13px;
     resize: vertical;
+    min-width: 0;
 }
 
 .form-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* pehle 1fr tha isliye bahar nikal raha tha */
     gap: 18px;
+    width: 100%;
+    min-width: 0;
 }
 
 .currency-input {
@@ -66,11 +86,16 @@
     border-radius: 12px;
     color: var(--accent);
     background: var(--panel2);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
 }
 
 .currency-input input {
     border: 0;
     padding-left: 0;
+    min-width: 0;
 }
 
 .submit-listing {
@@ -82,6 +107,7 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
+    min-width: 0;
 }
 
 .upload-box {
@@ -96,6 +122,8 @@
     border-style: dashed;
     text-align: center;
     cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .upload-box input {

@@ -7,11 +7,12 @@ import Sell from "./pages/Sell";
 import Chat from "./pages/Chat";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/Wishlist";
-import Profile from "./pages/Profile";
+import Profile from "./pages/profile";
 import Footer from "./components/footer";
 import "./App.css";
+import "./components/responsive.css";
 
-export const productsData = [ /* tera wahi productsData yaha rahega - same as before */
+export const initialProducts = [
   {
     id: 1,
     title: "Engineering Physics Textbook",
@@ -102,6 +103,8 @@ export const productsData = [ /* tera wahi productsData yaha rahega - same as be
   }
 ];
 
+export const productsData = initialProducts;
+
 const readStorage = (key, fallback) => {
   try { return JSON.parse(localStorage.getItem(key)) || fallback; } catch { return fallback; }
 };
@@ -109,17 +112,31 @@ const readStorage = (key, fallback) => {
 function App() {
   const [page, setPage] = useState("home");
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("All"); // NAYA
+  const [selectedCategory, setSelectedCategory] = useState("All");
   const [cart, setCart] = useState(() => readStorage("campuskart-cart", []));
   const [wishlist, setWishlist] = useState(() => readStorage("campuskart-wish", []));
   const [theme, setTheme] = useState(() => localStorage.getItem("campuskart-theme") || "dark");
   const [search, setSearch] = useState("");
-  const [user, setUser] = useState(() => readStorage("campuskart-user", { name: "Alex", branch: "CSE", verified: true }));
+  const [user, setUser] = useState(() => readStorage("campuskart-user", { name: "", pic: "" }));
+
+
+  const [products, setProducts] = useState(() => {
+    const saved = readStorage("campuskart-products", []);
+    return [...saved, ...initialProducts];
+  });
 
   useEffect(() => { localStorage.setItem("campuskart-cart", JSON.stringify(cart)); }, [cart]);
   useEffect(() => { localStorage.setItem("campuskart-wish", JSON.stringify(wishlist)); }, [wishlist]);
   useEffect(() => { localStorage.setItem("campuskart-theme", theme); document.documentElement.dataset.theme = theme; }, [theme]);
   useEffect(() => { localStorage.setItem("campuskart-user", JSON.stringify(user)); }, [user]);
+
+
+  useEffect(() => {
+    const userAdded = products.filter(p => p.id > 100); // tere naye wale ka id Date.now() hoga > 100
+    if (userAdded.length > 0) {
+      localStorage.setItem("campuskart-products", JSON.stringify(userAdded));
+    }
+  }, [products]);
 
   const go = (nextPage, product = null) => {
     setSelectedProduct(product);
@@ -138,13 +155,22 @@ function App() {
       return [...c, { ...product, quantity: 1 }];
     });
   };
+
+  const deleteProduct = (id) => {
+    if (!window.confirm("Delete this listing?")) return;
+    setProducts((prev) => prev.filter((p) => p.id !== id));
+
+    const saved = readStorage("campuskart-products", []);
+    const updatedSaved = saved.filter((p) => p.id !== id);
+    localStorage.setItem("campuskart-products", JSON.stringify(updatedSaved));
+  };
+
   const updateQuantity = (id, q) => setCart((c) => c.map((i) => i.id === id ? { ...i, quantity: q } : i).filter((i) => i.quantity > 0));
   const removeFromCart = (id) => setCart((c) => c.filter((i) => i.id !== id));
   const cartCount = cart.reduce((t, i) => t + i.quantity, 0);
 
-  // CATEGORY + SEARCH DONO KA FILTER
   const visibleProducts = useMemo(() => {
-    let filtered = productsData;
+    let filtered = products;
     if (selectedCategory !== "All") {
       filtered = filtered.filter(p => p.category.toLowerCase() === selectedCategory.toLowerCase());
     }
@@ -152,18 +178,27 @@ function App() {
       filtered = filtered.filter((p) => `${p.title} ${p.category} ${p.branch}`.toLowerCase().includes(search.toLowerCase()));
     }
     return filtered;
-  }, [search, selectedCategory]);
+  }, [search, selectedCategory, products]);
 
   const renderPage = () => {
-    const commonProps = { products: visibleProducts, allProducts: productsData, cart, wishlist, user, search, setSearch, go, addToCart, updateQuantity, removeFromCart, toggleWishlist, isWishlisted, setUser, selectedCategory, setSelectedCategory };
+    const commonProps = {
+      products: visibleProducts,
+      allProducts: products, 
+      cart, wishlist, user, search, setSearch, go,
+      addToCart, updateQuantity, removeFromCart,
+      toggleWishlist, isWishlisted, setUser,
+      selectedCategory, setSelectedCategory,
+      setProducts ,
+      deleteProduct
+    };
 
     if (page === "shop") return <Shop {...commonProps} />;
-    if (page === "detail") return <Detail {...commonProps} product={selectedProduct || productsData[0]} />;
+    if (page === "detail") return <Detail {...commonProps} product={selectedProduct || products[0]} />;
     if (page === "sell") return <Sell {...commonProps} />;
-    if (page === "chat") return <Chat {...commonProps} product={selectedProduct} />; // PRODUCT PASS KIYA
+    if (page === "chat") return <Chat {...commonProps} product={selectedProduct} />;
     if (page === "cart") return <Cart {...commonProps} />;
     if (page === "wishlist") return <Wishlist {...commonProps} />;
-    if (page === "profile") return <Profile {...commonProps} />; // PROFILE PAGE ADDED
+    if (page === "profile") return <Profile {...commonProps} />;
     return <Home {...commonProps} />;
   };
 

@@ -11,39 +11,39 @@ function Shop({
     isWishlisted,
     search,
     setSearch,
-    selectedCategory, // App.jsx se ayega
-    setSelectedCategory
+    selectedCategory,
+    setSelectedCategory,
+    deleteProduct
 }) {
     const [category, setCategory] = useState(selectedCategory || "All");
     const [branch, setBranch] = useState("All");
     const [condition, setCondition] = useState("All");
     const [sort, setSort] = useState("featured");
-    const [maxPrice, setMaxPrice] = useState(5000);
+    const [maxPrice, setMaxPrice] = useState(100000);
     const [filtersOpen, setFiltersOpen] = useState(false);
 
     const categories = ["All", "Books", "Electronics", "Furniture", "Clothing", "Stationery"];
     const branches = ["All", "CSE", "ECE", "ME", "CE"];
     const conditions = ["All", "New", "Like New", "Used"];
 
-    // FIX - Home se category aaye toh update karo
     useEffect(() => {
-        if (selectedCategory && selectedCategory!== "All") {
+        if (selectedCategory && selectedCategory !== "All") {
             setCategory(selectedCategory);
         }
     }, [selectedCategory]);
 
     const filteredProducts = useMemo(() => {
         let result = allProducts.filter((product) => {
-            const matchesCategory = category === "All" || product.category === category;
-            const matchesBranch = branch === "All" || product.branch === branch;
-            const matchesCondition = condition === "All" || product.condition === condition;
+            const matchesCategory = category === "All" || product.category?.toLowerCase() === category?.toLowerCase();
+            const matchesBranch = branch === "All" || product.branch?.toLowerCase() === branch?.toLowerCase() || !branches.map(b => b.toLowerCase()).includes(product.branch?.toLowerCase());
+            const matchesCondition = condition === "All" || product.condition?.toLowerCase().includes(condition.toLowerCase()) || !conditions.map(c => c.toLowerCase()).includes(product.condition?.toLowerCase());
             const matchesPrice = product.price <= maxPrice;
-            const matchesSearch =!search.trim() || `${product.title} ${product.category} ${product.branch}`.toLowerCase().includes(search.toLowerCase());
+            const matchesSearch = !search.trim() || `${product.title} ${product.category} ${product.branch} ${product.description || ""}`.toLowerCase().includes(search.toLowerCase());
             return matchesCategory && matchesBranch && matchesCondition && matchesPrice && matchesSearch;
         });
-        if (sort === "low") result.sort((a, b) => a.price - b.price);
-        if (sort === "high") result.sort((a, b) => b.price - a.price);
-        if (sort === "rating") result.sort((a, b) => b.rating - a.rating);
+        if (sort === "low") result = [...result].sort((a, b) => a.price - b.price);
+        if (sort === "high") result = [...result].sort((a, b) => b.price - a.price);
+        if (sort === "rating") result = [...result].sort((a, b) => b.rating - a.rating);
         return result;
     }, [allProducts, category, branch, condition, maxPrice, search, sort]);
 
@@ -51,10 +51,10 @@ function Shop({
         setCategory("All");
         setBranch("All");
         setCondition("All");
-        setMaxPrice(5000);
+        setMaxPrice(100000);
         setSearch("");
         setSort("featured");
-        if(setSelectedCategory) setSelectedCategory("All");
+        if (setSelectedCategory) setSelectedCategory("All");
     };
 
     return (
@@ -70,10 +70,10 @@ function Shop({
                 </button>
             </div>
             <div className="shop-layout">
-                <aside className={`filters-panel card ${filtersOpen? "open" : ""}`}>
+                <aside className={`filters-panel card ${filtersOpen ? "open" : ""}`}>
                     <div className="filter-title"><span><Filter size={17} /> Filters</span><button onClick={resetFilters}>Reset</button></div>
                     <label className="filter-field">Category
-                        <select value={category} onChange={(e) => { setCategory(e.target.value); if(setSelectedCategory) setSelectedCategory(e.target.value); }}>
+                        <select value={category} onChange={(e) => { setCategory(e.target.value); if (setSelectedCategory) setSelectedCategory(e.target.value); }}>
                             {categories.map((item) => <option key={item}>{item}</option>)}
                         </select>
                     </label>
@@ -84,7 +84,7 @@ function Shop({
                         <select value={condition} onChange={(e) => setCondition(e.target.value)}>{conditions.map((item) => <option key={item}>{item}</option>)}</select>
                     </label>
                     <label className="filter-field">Price up to ₹{maxPrice.toLocaleString("en-IN")}
-                        <input className="price-range" type="range" min="100" max="5000" step="100" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
+                        <input className="price-range" type="range" min="100" max="100000" step="100" value={maxPrice} onChange={(e) => setMaxPrice(Number(e.target.value))} />
                     </label>
                     <button className="mobile-close-filter" onClick={() => setFiltersOpen(false)}><X size={16} /> Apply Filters</button>
                 </aside>
@@ -97,8 +97,20 @@ function Shop({
                             <option value="rating">Top Rated</option>
                         </select>
                     </div>
-                    {filteredProducts.length? (
-                        <div className="products-grid">{filteredProducts.map((product) => <ProductCard key={product.id} product={product} go={go} addToCart={addToCart} toggleWishlist={toggleWishlist} isWishlisted={isWishlisted} />)}</div>
+                    {filteredProducts.length ? (
+                        <div className="products-grid">
+                            {filteredProducts.map((product) =>
+                                <ProductCard
+                                    key={product.id}
+                                    product={product}
+                                    go={go}
+                                    addToCart={addToCart}
+                                    toggleWishlist={toggleWishlist}
+                                    isWishlisted={isWishlisted}
+                                    deleteProduct={deleteProduct}
+                                />
+                            )}
+                        </div>
                     ) : (
                         <div className="empty-results card"><Search size={34} /><h2>No products found</h2><p>Try changing your filters.</p><button className="primary-button" onClick={resetFilters}>Clear Filters</button></div>
                     )}
