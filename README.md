@@ -1,20 +1,42 @@
 # CampusKart - Buy & Sell on Campus, One Click Away 🎓
 
-Live Demo: https://campuskart-official.vercel.app/
+> **Buy & Sell on Campus, One Click Away!**
 
-CampusKart is a student-focused marketplace frontend where college students can list and discover second-hand books, electronics, and essentials.
+CampusKart is a student-focused marketplace web application built to enable college students to easily list, discover, buy, and sell second-hand books, electronics, and daily campus essentials.
 
-### ✨ Features
-- Clean, responsive landing page with search
-- Product listing UI
-- Category filtering
-- Add Item form UI (frontend)
-- Mobile responsive design
-- Deployed on Vercel
+---
 
-### 🛠️ Tech Stack
-- React.js (Vite)
-- Tailwind CSS
-- React Router
-- Vercel for Deployment
+## 🚀 Live Demo
 
+Check out the live project here:
+* **Production Build:** [CampusKart Live App](https://campuskart-official.vercel.app/)
+* **Vercel Deployment:** [campuskart-drab.vercel.app](https://campus-kart-drab.vercel.app)
+
+---
+
+## ✨ Key Features
+
+- 🔍 **Smart Search & Discovery:** Quickly search for items listed across the campus.
+- 🏷️ **Category Filtering:** Filter products by categories like Books, Electronics, and Campus Essentials.
+- ➕ **List an Item:** Clean and intuitive UI form to post items for sale.
+- 📱 **Fully Responsive:** Smooth and optimized experience across mobile, tablet, and desktop viewports.
+- ⚡ **Fast & Modern UI:** Lightning-fast page loads built with React and Vite.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React.js (Vite)
+- **Styling:** Tailwind CSS
+- **Routing:** React Router
+- **Deployment:** Vercel
+
+---
+
+## 📁 Project Structure
+
+```text
+CampusKart/
+├── frontend/          # React + Vite source code
+├── .gitignore         # Root gitignore rules
+└── README.md          # Project documentation
