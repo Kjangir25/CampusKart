@@ -10,7 +10,7 @@ CampusKart is a student-focused marketplace web application built to enable coll
 
 Check out the live project here:
 * **Production Build:** [CampusKart Live App](https://campuskart-official.vercel.app/)
-* **Vercel Deployment:** [campuskart-drab.vercel.app](https://campus-kart-drab.vercel.app)
+
 
 ---
 
